@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css" />
+    <script src="https://cdn.plot.ly/plotly-latest.js"></script>
+</head>
+
+<body>
+
+    <button onclick="doIt()">doIt!</button>
+    <button onclick="clearIt()">clearIt!</button>
+
+    Sample rate:
+    <select id="sampleRateSelect">
+        <option value="80">80 Hz</option>
+        <option value="40">40 Hz</option>
+        <option value="20">20 Hz</option>
+        <option value="10">10 Hz</option>
+        <option value="5" selected>5 Hz</option>
+        <option value="0">0 (OFF)</option>
+    </select>
+
+    Actual sample rate: <span id="sampleRateSpan"></span>
+    Actual frame rate: <span id="frameRateSpan"></span>
+
+    <hr />
+
+    <div id="graphDiv" style="width: 100%;">
+
+    </div>
+
+    <script src="receive.js"></script>
+</body>
+
+</html>
