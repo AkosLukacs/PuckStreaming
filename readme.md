@@ -4,6 +4,9 @@ Demo of streaming data from the magnetometer from an Espruino Puck.JS at up to 8
 
 Javascript all the way down!
 
+New in v.0.2:
+ - Implemented battery level service to show how to connect to two characteristics and receive notification
+
 ![sample graph](docs/sample.png)
 
 # Usage
@@ -14,9 +17,16 @@ Javascript all the way down!
  - You can change the sample speed, or stop it with the dropdown
 
 # Code, features
+
+### Espruino
  - defined a custom BLE service & characteristic that uses notify to "push" the data form the magnetometer
  - the characteristic is writeable, so sample rate can be changed, or turned off
- - connect to that characteristic from the web page & subscribe to notifications
+ - battery level service that auto-updates every 10 seconds
+ - button click toggles the LED to quickly alter battery state
+
+### Web-Bluetooth
+ - connects to the characteristics from the web page & subscribe to notifications
+ - display magnetometer and battery level with Plotly.JS
 
 ## Serialization & deserialization
 

@@ -1,6 +1,6 @@
 // upload this to the Puck
 
-var magRate = 5;
+var magRate = 5, batteryInterval;
 
 function onMag(d) {
   // print('mag:', d)
@@ -14,6 +14,18 @@ function onMag(d) {
   })
 }
 
+function updateBattery() {
+  NRF.updateServices({
+    0x2A19: {
+      0x2A19: {
+        notify: true,
+        readable: true,
+        value: [E.getBattery()]
+      }
+    }
+  })
+}
+
 function onInit() {
   // on connect / disconnect blink the green / red LED turn on / off the magnetometer
   NRF.on('connect', function() {Puck.magOn(magRate); digitalPulse(LED2, 1, 100)})
@@ -21,6 +33,15 @@ function onInit() {
 
   // declare the services
   NRF.setServices({
+    // Battery level service
+    0x2A19: {
+      0x2A19: {
+        notify: true,
+        readable: true,
+        value: [E.getBattery()]
+      }
+    },
+    // Magnetometer service
     'f8b23a4d-89ad-4220-8c9f-d81756009f0c': {
       'f8b23a4d-89ad-4220-8c9f-d81756009f0c': {
         description: 'Puck magnetometer',
@@ -47,7 +68,7 @@ function onInit() {
           // 0.31 Hz - 8uA
           // 0.16 Hz - 8uA
           // 0.08 Hz - 8uA
-          if ([80, 40, 20, 10, 5].indexOf(d) >= 0) {Puck.magOn(d)}
+          if ([80, 40, 20, 10, 5].indexOf(d) >= 0) {Puck.magOn(d); magRate = d}
         }
       }
     }
@@ -55,6 +76,11 @@ function onInit() {
 
   /// don't turn on the magnetometer yet
   //Puck.magOn(5)
+
+  // The button toggles the red LED.
+  // Just an easy way to "change" the battery level, since a LED continuously turned on causes a measurable voltage drop on a CR2032.
+  setWatch(function() {LED1.toggle()}, BTN, {repeat: true})
+  batteryInterval = setInterval(updateBattery, 10000)
 
   Puck.on('mag', onMag)
 }
