@@ -1,16 +1,23 @@
 # Streaming data to the browser with web-bluetooth at 80Hz!
 
-Demo of streaming data from the magnetometer from an Espruino Puck.JS at up to 80 Hz to the browser with Web-Bluetooth and plotting with plotly JS. In real time :)
+Demo of streaming data from the magnetometer from an Espruino Puck.JS / Bangle.JS at up to 80 Hz to the browser with Web-Bluetooth and plotting with plotly JS. In real time :)
 
 Javascript all the way down!
 
-New in v.0.2:
+
+
+## Changelog / release notes:
+
+### v.0.3:
+ - Update to work with Bangle.JS as well
+
+### v.0.2:
  - Implemented battery level service to show how to connect to two characteristics and receive notification
 
 ![sample graph](docs/sample.png)
 
 # Usage
- - Upload the [PuckStreaming.js](src/PuckStreaming.js) to your Puck
+ - Upload the [PuckStreaming.js](src/PuckStreaming.js) to your Puck, or [BangleStreaming.js](src/BangleStreaming.js) to your Bangle
  - Open [index.html](src/index.html) in a browser that supports web Bluetooth (tested with Chrome, and Edge "dev")
  - Press the DoIt button & select your Puck to connect to it
  - Streaming start as soon as you are connected
@@ -19,10 +26,10 @@ New in v.0.2:
 # Code, features
 
 ### Espruino
- - defined a custom BLE service & characteristic that uses notify to "push" the data form the magnetometer
+ - defined a custom BLE service & characteristic that uses notify to "push" the data form the magnetometer (and accelerometer in case of the Bangle)
  - the characteristic is writeable, so sample rate can be changed, or turned off
  - battery level service that auto-updates every 10 seconds
- - button click toggles the LED to quickly alter battery state
+ - button click toggles the LED to quickly alter battery state. Only on Puck, but you can turn on the screen of the Bangle, and that changes battery level.
 
 ### Web-Bluetooth
  - connects to the characteristics from the web page & subscribe to notifications

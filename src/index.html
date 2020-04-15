@@ -10,8 +10,9 @@
 
 <body>
 
-    <button onclick="doIt()">doIt!</button>
-    <button onclick="clearIt()">clearIt!</button>
+    <button onclick="doIt()">Connect!</button>
+    <button onclick="clearIt()">Clear the graphs!</button>
+    <button onclick="disconnect()">Disconnect!</button>
 
     Sample rate:
     <select id="sampleRateSelect">
@@ -23,13 +24,16 @@
         <option value="0">0 (OFF)</option>
     </select>
 
-    Actual sample rate: <span id="sampleRateSpan">?</span>
-    Actual frame rate: <span id="frameRateSpan">?</span>
+    <br />
+    Magnetometer sample rate: <span id="sampleRateSpan">?</span>
+    Accelerometer sample rate: <span id="acceleroSampleRateSpan">?</span>
     Battery level: <span id="battLevelSpan">?</span>
+    Browser frame rate: <span id="frameRateSpan">?</span>
 
     <hr />
 
-    <div id="graphDiv" style="width: 100%;"></div>
+    <div id="magnetoDiv" style="width: 100%;"></div>
+    <div id="acceleroDiv" style="width: 100%;"></div>
     <div id="battGraphDiv" style="width: 100%;"></div>
 
     <script src="receive.js"></script>
